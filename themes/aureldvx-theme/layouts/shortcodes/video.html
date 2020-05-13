@@ -1,0 +1,20 @@
+<figure class="video-player">
+    {{ $autoplay := .Get "autoplay" }}
+    {{ $controls := .Get "controls" }}
+    {{ $muted := .Get "muted" }}
+    {{ $loop := .Get "loop" }}
+    {{ $poster := .Get "poster" }}
+    {{ $src := .Get "src" }}
+    {{ $title := .Get "title" }}
+    {{ $content := .Inner }}
+    <video {{ if not ( eq $autoplay "false" ) }}autoplay{{ end }}
+        {{ if not ( eq $controls "false" ) }}controls{{ end }}
+        {{ if not ( eq $muted "false" ) }}muted{{ end }}
+        {{ if not ( eq $loop "false" ) }}loop{{ end }}
+        {{ if not ( eq $poster "false" ) }}poster="{{ $poster }}"{{ end }}>
+        <source {{ if not ( eq $src "false" ) }}src="{{ $src }}"{{ end }} type="video/mp4">
+    </video>
+    {{ if not ( eq $content "" ) }}
+    <figcaption><p>{{ $content }}</p></figcaption>
+    {{ end }}
+</figure>

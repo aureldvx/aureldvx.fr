@@ -1,0 +1,41 @@
+@import "config/global";
+
+main {
+  background-color: var(--white);
+  padding: space(3);
+  
+  h1 {
+    font-family: var(--camila);
+    @include font-size(4rem)
+  }
+  
+  h2 {
+    margin: space(8) 0 space(2) 0;
+  }
+  
+  p {
+    line-height: 170%;
+  }
+  
+  p + p {
+    margin-top: space(1);
+  }
+  
+  a {
+    display: inline;
+    padding-bottom: 2px;
+    border-bottom-style: solid;
+    border-image-slice: 1;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--blue);
+    transition: .1s linear;
+    font-weight: 600;
+  
+    @include up(900px) {
+      &:hover {
+        border-image-source: linear-gradient(to left, var(--blue), var(--yellow));
+        border-bottom-width: 4px;
+      }
+    }
+  }
+}

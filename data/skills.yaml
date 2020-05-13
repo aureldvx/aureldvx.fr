@@ -1,0 +1,173 @@
+categories:
+  - Front-end
+  - Back-end
+  - UI/UX Design
+  - Outils
+  - Référencement
+
+skills:
+  # Front-end
+  - abbr: HTML
+    name: Hypertext Markup Language
+    category: Front-end
+    completed: true
+    homepage: true
+    row: 1
+  - abbr: CSS
+    name: Cascaded Stylesheets
+    category: Front-end
+    completed: true
+    homepage: true
+    row: 1
+  - abbr: SASS
+    name: Syntactically Awesome StyleSheets
+    category: Front-end
+    completed: true
+  - abbr: JS
+    name: Vanilla JS
+    category: Front-end
+    completed: true
+    homepage: true
+    row: 1
+  - abbr: 3D
+    name: ThreeJS
+    category: Front-end
+    completed: false
+  - abbr: VUE
+    name: Vue.js
+    category: Front-end
+    completed: false
+  - abbr: GLP
+    name: Gulp.js
+    category: Front-end
+    completed: true
+  - abbr: WPK
+    name: Webpack
+    category: Front-end
+    completed: false
+  - abbr: BTP
+    name: Bootstrap
+    category: Front-end
+    completed: true
+  - abbr: TWD
+    name: Tailwind
+    category: Front-end
+    completed: true
+  - abbr: BMA
+    name: Bulma
+    category: Front-end
+    completed: true
+
+  # Back-end
+  - abbr: PHP
+    name: Hypertext Preprocessor
+    category: Back-end
+    completed: true
+    homepage: true
+    row: 1
+  - abbr: SQL
+    name: MySQL
+    category: Back-end
+    completed: true
+  - abbr: SF
+    name: Symfony
+    category: Back-end
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: WP
+    name: WordPress
+    category: Back-end
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: GIT
+    name: Git
+    category: Back-end
+    completed: true
+  - abbr: XPS
+    name: Express
+    category: Back-end
+    completed: false
+  - abbr: MGO
+    name: MongoDB
+    category: Back-end
+    completed: false
+  - abbr: GCP
+    name: Google Cloud Platform
+    category: Back-end
+    completed: false
+
+  # UI/UX
+  - abbr: ACS
+    name: Accessibilité
+    category: UI/UX Design
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: ARB
+    name: Arborescence
+    category: UI/UX Design
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: USR
+    name: Userflow
+    category: UI/UX Design
+    completed: true
+  - abbr: WRF
+    name: Wireframe
+    category: UI/UX Design
+    completed: true
+  - abbr: MQT
+    name: Maquettage
+    category: UI/UX Design
+    completed: true
+  - abbr: PRO
+    name: Prototypage
+    category: UI/UX Design
+    completed: true
+
+  # Outils
+  - abbr: JTB
+    name: Suite JetBrains
+    category: Outils
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: ADB
+    name: Suite Adobe
+    category: Outils
+    completed: true
+  - abbr: FIG
+    name: Figma
+    category: Outils
+    completed: true
+    homepage: true
+    row: 2
+  - abbr: VSC
+    name: Visual Studie Code
+    category: Outils
+    completed: true
+  - abbr: SKT
+    name: Sketch
+    category: Outils
+    completed: true
+
+  # Référencement
+  - abbr: GMB
+    name: Google MyBusiness
+    category: Référencement
+    completed: true
+  - abbr: GDS
+    name: Google Data Studio
+    category: Référencement
+    completed: true
+  - abbr: GAT
+    name: Google Analytics
+    category: Référencement
+    completed: true
+  - abbr: GSC
+    name: Google Search Console
+    category: Référencement
+    completed: true

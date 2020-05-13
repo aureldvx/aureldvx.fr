@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -f .env.local ]
+then
+  export $(cat .env.local | sed 's/#.*//g' | xargs)
+fi
+
+hugo &&
+find ./public/images -type f -exec chmod 755 {} \; &&
+find ./public/fonts -type f -exec chmod 755 {} \; &&
+cp ./.htaccess ./public/ &&
+rsync -avz --exclude ".DS_Store" --delete ./public/ ${USER}@${HOST}:~/${DIR}
+
+exit 0

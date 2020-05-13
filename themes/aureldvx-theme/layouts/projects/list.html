@@ -1,0 +1,114 @@
+{{ define "metatags" }}
+<!-- Primary Meta Tags -->
+<title>Projets ~ Aurélien Devaux</title>
+<meta name="title" content="Projets ~ Aurélien Devaux">
+<meta name="description" content="De la simple intégration de maquette et à la réalisation d'une web-app complexe, voici l'ensemble de mes projets.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Site.BaseURL }}projects">
+<meta property="og:title" content="Projets ~ Aurélien Devaux">
+<meta property="og:description" content="De la simple intégration de maquette et à la réalisation d'une web-app complexe, voici l'ensemble de mes projets.">
+<meta property="og:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ .Site.BaseURL }}projects">
+<meta property="twitter:title" content="Projets ~ Aurélien Devaux">
+<meta property="twitter:description" content="De la simple intégration de maquette et à la réalisation d'une web-app complexe, voici l'ensemble de mes projets.">
+<meta property="twitter:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
+{{ end }}
+{{ define "styles" }}
+{{ $options := (dict "targetPath" "/css/projects.css" "outputStyle" "compressed" "enableSourceMap" false) }}
+{{ $style := resources.Get "scss/projects.scss" | resources.ToCSS $options | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end }}
+
+{{ define "bodyClass" }}projects{{ end }}
+
+{{ define "main" }}
+
+<section class="slider">
+	<div class="slider__navigation">
+		<button type="button" id="prev">
+			<svg width="8" height="261" viewBox="0 0 8 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.35356 0.646447C4.1583 0.451184 3.84172 0.451184 3.64646 0.646447L0.464477 3.82843C0.269215 4.02369 0.269215 4.34027 0.464477 4.53553C0.659739 4.7308 0.976322 4.7308 1.17158 4.53553L4.00001 1.70711L6.82844 4.53553C7.0237 4.7308 7.34028 4.7308 7.53555 4.53553C7.73081 4.34027 7.73081 4.02369 7.53555 3.82843L4.35356 0.646447ZM4.5 261L4.50001 1L3.50001 1L3.5 261L4.5 261Z"
+							fill="black" />
+			</svg>
+			<span>Préc</span>
+		</button>
+		<svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="2" cy="2" r="2" fill="black" />
+		</svg>
+		<button type="button" id="next">
+			<span>Suiv.</span>
+			<svg width="8" height="261" viewBox="0 0 8 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M3.64644 260.354C3.8417 260.549 4.15828 260.549 4.35354 260.354L7.53552 257.172C7.73078 256.976 7.73078 256.66 7.53552 256.464C7.34026 256.269 7.02368 256.269 6.82842 256.464L3.99999 259.293L1.17156 256.464C0.9763 256.269 0.659717 256.269 0.464455 256.464C0.269193 256.66 0.269193 256.976 0.464455 257.172L3.64644 260.354ZM3.5 -2.18557e-08L3.49999 260L4.49999 260L4.5 2.18557e-08L3.5 -2.18557e-08Z"
+							fill="black" />
+			</svg>
+		</button>
+	</div>
+
+	{{ $list := where .Site.RegularPages "Section" "projects" }}
+	{{ $len := len $list }}
+
+	<div class="slider-item">
+		<figure class="slider-item__thumbnail">
+			<div id="slider-thumbnail"
+					 data-images='[{{ range $index, $element := $list }}"{{ .Params.thumbnail }}"{{ if ne (add $index 1) $len }},{{ end }}{{ end }}]'>
+			</div>
+		</figure>
+		<article class="slider-item__details">
+			<header>
+				<div class="slider-item__date">
+					{{ range $index, $element := $list }}
+					<time {{ if eq $index 0 }}class="active" {{ end }} data-slider="{{ add $index 1 }}">{{ .Params.year }}</time>
+					{{ end }}
+				</div>
+				<div class="slider-item__tags">
+					{{ range $index, $element := $list }}
+					<span {{ if eq $index 0 }}class="active" {{ end }} data-real-client="{{ .Params.real }}"
+								data-slider="{{ add $index 1 }}">{{ if eq .Params.real true}}Projet réel{{ else }}Project
+						fictif{{ end }}</span>
+					{{ end }}
+				</div>
+			</header>
+			<section class="slider-item__content">
+				<div class="slider-item__title">
+					{{ range $index, $element := $list }}
+					<h2 {{ if eq $index 0 }}class="active" {{ end }} data-slider="{{ add $index 1 }}">{{ .Title }}</h2>
+					{{ end }}
+				</div>
+				<div class="slider-item__mission">
+					{{ range $index, $element := $list }}
+					<h3 {{ if eq $index 0 }}class="active" {{ end }} data-slider="{{ add $index 1 }}">{{ .Params.mission }}</h3>
+					{{ end }}
+				</div>
+			</section>
+			<footer>
+				{{ range $index, $element := $list }}
+				<a href="{{ .Permalink }}" class="arrow slider-item__link {{ if eq $index 0 }}active{{ end }}"
+					 data-slider="{{ add $index 1 }}">
+					<span>Découvrir</span>
+					<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z"
+									fill="black" />
+					</svg>
+				</a>
+				{{ end }}
+			</footer>
+		</article>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+{{ $app := resources.Get "js/app.js" }}
+{{ $three := resources.Get "js/vendor/three.min.js" | fingerprint }}
+{{ $datgui := resources.Get "js/projects/dat-gui.js" }}
+{{ $gsap := resources.Get "js/projects/gsap.js" }}
+{{ $sketch := resources.Get "js/projects/sketch.js" }}
+{{ $slider := resources.Get "js/projects/slider.js" }}
+{{ $js := slice $app $datgui $gsap $sketch $slider | resources.Concat "js/projects/index.js" | fingerprint }}
+<script src="{{ $three.Permalink }}"></script>
+<script src="{{ $js.Permalink }}"></script>
+{{ end }}

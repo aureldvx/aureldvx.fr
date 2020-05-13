@@ -1,0 +1,13 @@
+@function space ($number) {
+  @return calc(#{$number} * var(--space));
+}
+
+@function border ($number) {
+  @return #{$number}px solid var(--black);
+}
+
+@mixin up ($size) {
+  @media all and (min-width: #{$size}) {
+    @content
+  }
+}

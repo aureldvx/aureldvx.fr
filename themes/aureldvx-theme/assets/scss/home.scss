@@ -1,0 +1,483 @@
+@import "config/global";
+
+main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  //grid-template-rows: repeat(23, min-content);
+  grid-template-rows: repeat(13, min-content);
+  grid-gap: 2px;
+  //grid-template-areas: "heroCover" "heroTitle" "heroLinkLeft" "heroLinkRight" "heroImage" "heroSquare" "skillsTitle" "skillsRow1" "skillsRow2" "playground" "projectTitle" "project1" "project2" "project3" "project4" "project5" "project6" "blogTitle" "article1" "article2" "newsletter" "article3" "article4" "contact";
+  grid-template-areas: "heroCover" "heroTitle" "heroLinkLeft" "heroLinkRight" "heroSquare" "heroImage" "skillsTitle" "skillsRow1" "skillsRow2" "playground" "projectTitle" "projects" "contact";
+
+  @include up(800px) {
+    grid-template-columns: 17fr 8.9fr 2fr 5fr 16fr 3fr 8fr 6fr 16fr 17fr;
+    //grid-template-rows: repeat(17, min-content);
+    grid-template-rows: repeat(9, min-content);
+    //grid-template-areas: "heroTitle heroTitle heroTitle heroTitle heroTitle heroTitle heroCover heroCover heroCover heroCover" "heroLinkLeft heroLinkLeft heroLinkRight heroLinkRight heroLinkRight heroLinkRight heroCover heroCover heroCover heroCover" "heroImage heroImage heroImage heroImage heroSquare heroSquare heroCover heroCover heroCover heroCover" "heroImage heroImage heroImage heroImage skillsTitle skillsTitle skillsTitle skillsTitle skillsTitle skillsTitle" "heroImage heroImage heroImage heroImage skillsRow1 skillsRow1 skillsRow1 skillsRow1 skillsRow1 skillsRow1" "skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2" "playground playground playground playground playground playground playground playground playground playground" "projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle project1 project1 project1" "project2 project2 project2 project3 project3 project3 project3 project1 project1 project1" "project2 project2 project2 project3 project3 project3 project3 project6 project6 project6" "project2 project2 project2 project4 project4 project4 project4 project6 project6 project6" "project5 project5 project5 project5 project5 project5 project5 project6 project6 project6" "blogTitle blogTitle blogTitle blogTitle blogTitle blogTitle blogTitle blogTitle blogTitle blogTitle" "article1 article1 article1 article1 article1 article1 article1 article1 article2 article2" "article3 article3 article3 article3 newsletter newsletter newsletter newsletter article2 article2" "article3 article3 article3 article3 article4 article4 article4 article4 article4 article4" "contact contact contact contact contact contact contact contact contact contact";
+    grid-template-areas: "heroTitle heroTitle heroTitle heroTitle heroTitle heroTitle heroCover heroCover heroCover heroCover" "heroLinkLeft heroLinkLeft heroLinkRight heroLinkRight heroLinkRight heroLinkRight heroCover heroCover heroCover heroCover" "heroImage heroImage heroImage heroImage heroSquare heroSquare heroCover heroCover heroCover heroCover" "heroImage heroImage heroImage heroImage skillsTitle skillsTitle skillsTitle skillsTitle skillsTitle skillsTitle" "heroImage heroImage heroImage heroImage skillsRow1 skillsRow1 skillsRow1 skillsRow1 skillsRow1 skillsRow1" "skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2 skillsRow2" "playground playground playground playground playground playground playground playground playground playground" "projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle projectTitle" "projects projects projects projects projects projects projects projects projects projects" "contact contact contact contact contact contact contact contact contact contact";
+  }
+
+  .title {
+    background-color: var(--white);
+    width: 100%;
+    padding: space(3);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-family: var(--camila);
+      @include font-size(3rem);
+    }
+  }
+
+  .hero__title {
+    grid-area: heroTitle;
+    background-color: var(--white);
+    padding: space(3) space(3) space(3) space(3);
+
+    @include up(800px) {
+      padding: 40vh space(3) space(3) space(3);
+    }
+
+    h1 {
+      font-family: var(--camila);
+      font-weight: 600;
+      @include font-size(5rem);
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-weight: 200;
+      @include font-size(2.5rem);
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+    }
+
+    p {
+      margin-top: space(3);
+      width: 100%;
+      max-width: 700px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .hero__link--left,
+  .hero__link--right {
+    padding: space(3);
+    text-align: center;
+  }
+
+  .hero__link--left {
+    grid-area: heroLinkLeft;
+  }
+
+  .hero__link--right {
+    grid-area: heroLinkRight;
+  }
+
+  .hero__cover {
+    grid-area: heroCover;
+    width: 100%;
+    height: 300px;
+    position: relative;
+
+    @include up(800px) {
+      height: 100%;
+    }
+
+    canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .hero__square {
+    grid-area: heroSquare;
+    width: 100%;
+    height: 100%;
+    padding: space(3);
+    background-color: var(--lightgrey);
+    
+    img { object-fit: contain }
+  }
+
+  .hero__image {
+    grid-area: heroImage;
+    width: 100%;
+    height: 450px;
+    background: url('/images/pages/home-target.png') var(--lightgrey);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    @include up(800px) {
+      height: 100%;
+    }
+  }
+
+  #skills-title {
+    grid-area: skillsTitle;
+  }
+
+  #skills-row1 {
+    grid-area: skillsRow1;
+    display: grid;
+    grid-template: repeat(2, auto) / repeat(2, 1fr);
+    grid-gap: 2px;
+
+    @include up(1170px) {
+      grid-template: auto / repeat(4, 1fr);
+    }
+  }
+
+  #skills-row2 {
+    grid-area: skillsRow2;
+    display: grid;
+    grid-gap: 2px;
+    grid-template: repeat(3, auto) / repeat(2, 1fr);
+
+    @include up(800px) {
+      grid-template: repeat(2, auto) / repeat(3, 1fr);
+    }
+
+    @include up(1170px) {
+      grid-template: auto / repeat(6, 1fr);
+    }
+  }
+
+  .skill-item {
+    background-color: var(--white);
+    padding: space(1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    @include up(440px) {
+      padding: space(3);
+    }
+
+    header {
+      text-align: center;
+      @include font-size(0.8rem);
+
+      @include up(440px) {
+        @include font-size(1rem);
+      }
+    }
+
+    h3 {
+      @include font-size(2.5rem);
+
+      @include up(440px) {
+        @include font-size(5rem);
+      }
+
+      @include up(1170px) {
+        @include font-size(3rem);
+      }
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .playground {
+    grid-area: playground;
+    width: 100%;
+    height: 500px;
+    position: relative;
+  }
+
+  #projects-title {
+    grid-area: projectTitle;
+  }
+
+  section#projects {
+    grid-area: projects;
+    width: 100%;
+    display: grid;
+    grid-template: repeat(4, min-content) / 1fr;
+    grid-template-areas:
+      "project1"
+      "project2"
+      "project3"
+      "project4";
+
+    @include up(950px) {
+      grid-template: repeat(4, min-content) / repeat(2, 1fr);
+      grid-template-areas:
+        "project1 project2"
+        "project3 project4";
+    }
+
+    @for $i from 1 through 4 {
+    #project#{$i} {
+      grid-area: project#{$i};
+    }
+  }
+  }
+
+  .project-item {
+    width: 100%;
+    height: 100%;
+
+    figure {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    figcaption {
+      position: absolute;
+      bottom: space(3);
+      left: 50%;
+      background-color: var(--white);
+      border: 2px solid var(--black);
+      padding: space(1);
+      transform-origin: center;
+      transform: translateX(-50%);
+      text-align: center;
+      width: calc(100% - 48px);
+
+      @include up(550px) {
+        bottom: unset;
+        top: space(3);
+        left: space(3);
+        padding: space(3) space(1);
+        writing-mode: vertical-rl;
+        text-orientation: sideways;
+        transform: translateX(0) rotate(180deg);
+        width: auto;
+        max-height: 84%;
+      }
+
+      .project-item__name {
+        font-family: var(--camila);
+        font-weight: 600;
+        @include font-size(1.5rem);
+        display: inline;
+      }
+
+      .project-item__mission {
+        display: inline;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        @include font-size(1.1rem);
+      }
+    }
+
+    @include up(950px) {
+      img { transition: .2s ease-in; }
+      
+      &:hover img {
+        filter: grayscale(100%);
+      }
+    }
+  }
+
+  #blog-title {
+    grid-area: blogTitle;
+  }
+
+  @for $i from 1 through 4 {
+    #article#{$i} {
+      grid-area: article#{$i};
+    }
+  }
+
+  .blog-item {
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+
+    .blog-item__thumbnail {
+      width: 100%;
+      height: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .blog-item__publish-date {
+      font-weight: 300;
+      @include font-size(1.2rem);
+    }
+
+    .blog-item__reading-time {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-weight: 300;
+
+      svg {
+        margin-right: space(1)
+      }
+    }
+
+    .blog-item__title {
+      font-family: var(--camila);
+      font-weight: 600;
+      @include font-size(2.5rem);
+    }
+  }
+
+  .blog-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .blog-item__thumbnail {
+      height: 300px;
+    }
+
+    header {
+      width: 100%;
+      margin-top: space(3);
+      padding: 0 space(3);
+    }
+
+    .blog-item__title {
+      padding: 0 space(3);
+      margin-top: space(3);
+    }
+
+    .blog-item__excerpt {
+      padding: 0 space(3);
+      margin-top: space(3);
+    }
+
+    footer {
+      padding: 0 space(3);
+      margin: space(3) 0;
+    }
+  }
+
+  .blog-item--horizontal {
+    @include up(800px) {
+      padding-right: space(3);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: repeat(4, auto);
+      grid-gap: space(2) space(3);
+      grid-template-areas: "thumbnail metadata" "thumbnail title" "thumbnail excerpt" "thumbnail footer";
+
+      header {
+        grid-area: metadata;
+        margin-top: space(3);
+        padding: 0;
+      }
+      .blog-item__thumbnail {
+        grid-area: thumbnail;
+        padding: 0;
+
+        @include up(800px) {
+          height: 100%;
+        }
+      }
+
+      .blog-item__title {
+        grid-area: title;
+        padding: 0;
+      }
+
+      .blog-item__excerpt {
+        grid-area: excerpt;
+        padding: 0;
+      }
+
+      footer {
+        grid-area: footer;
+        padding: 0;
+        margin-bottom: space(3);
+      }
+    }
+  }
+
+  .stay-updated {
+    grid-area: newsletter;
+    padding: space(4) space(3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+
+    h3 {
+      font-family: var(--camila);
+      font-weight: 500;
+      font-style: italic;
+      text-align: center;
+      @include font-size(2rem);
+    }
+
+    p {
+      margin: space(3);
+      text-align: center;
+    }
+
+    form {
+      width: 100%;
+
+      .form-input {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        label {
+          text-align: center;
+        }
+
+        input {
+          width: 100%;
+          border: none;
+          border-bottom: solid 2px var(--black);
+          padding: space(1);
+          text-align: center;
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        border: 2px solid var(--black);
+        background: transparent;
+        color: var(--black);
+        padding: space(2);
+        margin-top: space(3);
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+          background-color: var(--black);
+          color: var(--white)
+        }
+      }
+    }
+  }
+
+  .contact {
+    border-top: 0
+  }
+}

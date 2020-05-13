@@ -1,0 +1,95 @@
+form.contact {
+  grid-area: contact;
+  width: 100%;
+  padding: space(3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--white);
+  border-top: solid 2px var(--black);
+
+  h2 {
+    font-family: var(--camila);
+    font-weight: 600;
+    font-style: italic;
+    @include font-size(2.5rem);
+    margin-bottom: space(3);
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  p,
+  input,
+  select,
+  span[contenteditable="true"] {
+    @include font-size(1.8rem);
+  }
+
+  input,
+  select {
+    display: inline;
+    border-radius: 0;
+    font-weight: 600;
+    border: none;
+    color: var(--black);
+    outline: 0;
+  }
+
+  select {
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  span[contenteditable="true"] {
+    font-weight: 600;
+    color: var(--black);
+    outline: 0;
+  }
+
+  input,
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  input::placeholder {
+    color: var(--black);
+  }
+
+  button {
+    display: block;
+    width: fit-content;
+    text-align: center;
+    border: 2px solid var(--black);
+    background: transparent;
+    color: var(--black);
+    padding: space(2);
+    margin-top: space(5);
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+      background-color: var(--black);
+      color: var(--white)
+    }
+  }
+
+  .form__error-message {
+    margin-top: space(2);
+    @include font-size(1rem);
+
+
+    span {
+      display: block;
+      width: 100%;
+    }
+  }
+}

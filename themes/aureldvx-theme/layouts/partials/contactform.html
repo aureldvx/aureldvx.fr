@@ -1,0 +1,14 @@
+<form class="contact">
+    <h2>{{ .blocTitle }}</h2>
+    <p>
+        👋 Je m'appelle <span contenteditable="true" id="contact__identity" tabindex="0">votre nom ici</span> et je souhaite vous contacter au sujet
+        <select name="mission" id="mission" tabindex="0" required>
+            <option value="" selected disabled>[choisir]</option>
+            <option value="project">d'un projet.</option>
+            <option value="advice">d'un conseil.</option>
+            <option value="coffee">d'un café.</option>
+        </select></p>
+    <p>Pour décrire un peu plus ma demande, <span id="contact__description" contenteditable="true" tabindex="0">expliquez votre demande ici</span>.</p>
+    <p>Mon email est <span inputmode="email" id="contact__email" contenteditable="true" tabindex="0">votre email ici</span>.</p>
+    <button type="submit">Envoyer le message</button>
+</form>

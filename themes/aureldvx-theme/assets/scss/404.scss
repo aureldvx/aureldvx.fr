@@ -1,0 +1,51 @@
+@import "config/global";
+
+main {
+  background-color: var(--white);
+  padding: space(6) space(3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  
+  @include up(900px) {
+    display: grid;
+    grid-template: auto / repeat(2, 1fr);
+  }
+  
+  img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    justify-self: flex-end;
+  }
+  
+  h1 {
+    margin: space(3) 0;
+    font-family: var(--camila);
+    @include font-size(3rem);
+  }
+  
+  p {
+    line-height: 160%;
+    max-width: 500px;
+    text-align: center;
+  
+    @include up(900px) {
+      text-align: left;
+    }
+  }
+  
+  p + p { margin-top: space(2); }
+  
+  a {
+    margin-top: space(5);
+    display: inline-block;
+    padding: space(2);
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 5px;
+  }
+}

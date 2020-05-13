@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+@import "fonts/camila";
+@import "fonts/eina03";
+@import "reset";
+@import "../../node_modules/rfs/scss";
+@import "variables";
+@import "functions";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: var(--eina);
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+html {
+  padding: space(2);
+  background: var(--white);
+
+  @include up(800px) {
+    padding: space(3);
+  }
+}
+
+body {
+  background-color: var(--black);
+  outline: border(2)
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--white);
+}
+
+body.is-mobile .cursor { display: none }
+
+@media (any-pointer: fine) {
+  .cursor {display: none }
+  @include up(900px) {
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 10;
+    }
+    .cursor__inner {
+      fill: transparent;
+      stroke: var(--blue);
+      stroke-width: 2px;
+    }
+  }
+}
+
+@import "../partials/links";
+@import "../partials/header";
+@import "../partials/contact-form";
+@import "../partials/title";
+@import "../partials/footer";

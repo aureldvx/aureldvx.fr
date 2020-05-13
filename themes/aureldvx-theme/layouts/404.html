@@ -1,0 +1,22 @@
+{{ define "metatags"}}
+<title>Erreur 404 ~ Aurélien Devaux</title>
+{{ end }}
+{{ define "styles" }}
+{{ $options := (dict "targetPath" "/css/404.css" "outputStyle" "compressed" "enableSourceMap" false) }}
+{{ $style := resources.Get "scss/404.scss" | resources.ToCSS $options | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end }}
+
+{{ define "bodyClass" }}error404{{ end }}
+
+{{ define "main" }}
+<img src="/images/pages/404-illustration.png" alt="Illustration d'un homme qui regarde sur une carte">
+<div class="content">
+    <h1>Erreur 404</h1>
+    <p>Vous avez dit à vos amis que vous n'apportiez pas votre téléphone, pour essayer de découvrir ce qu'était le voyage à l'époque.</p>
+    <p>Vous avez acheté une carte, une bouteille d'eau et vous avez apporté votre appareil photo pour prendre le cliché en or.</p>
+    <p>Mais la carte date de 2005 et le paysage a changé.</p>
+    <p>Vous voilà donc au milieu d'un grand champ, que la carte continue de revendiquer comme étant une épicerie locale.</p>
+    <a href="/">Revenir à l'accueil</a>
+</div>
+{{ end }}

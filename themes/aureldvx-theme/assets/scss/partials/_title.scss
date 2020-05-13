@@ -1,0 +1,15 @@
+.title {
+  background-color: var(--white);
+  width: 100%;
+  padding: space(3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  h1,
+  h2 {
+    font-family: var(--camila);
+    @include font-size(3rem);
+  }
+}

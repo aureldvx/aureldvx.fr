@@ -1,0 +1,544 @@
+{{ define "metatags" }}
+<!-- Primary Meta Tags -->
+<title>Portfolio ~ Aurélien Devaux</title>
+<meta name="title" content="Portfolio ~ Aurélien Devaux">
+<meta name="description" content="Je vous aide à concevoir et développer votre futur site internet (et pas que !). Que vous soyez un indépendant, une TPE/PME ou une grande entreprise, nous pouvons collaborer ensemble pour renforcer votre présence sur le web.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ .Site.BaseURL }}">
+<meta property="og:title" content="Portfolio ~ Aurélien Devaux">
+<meta property="og:description" content="Je vous aide à concevoir et développer votre futur site internet (et pas que !). Que vous soyez un indépendant, une TPE/PME ou une grande entreprise, nous pouvons collaborer ensemble pour renforcer votre présence sur le web.">
+<meta property="og:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ .Site.BaseURL }}">
+<meta property="twitter:title" content="Portfolio ~ Aurélien Devaux">
+<meta property="twitter:description" content="Je vous aide à concevoir et développer votre futur site internet (et pas que !). Que vous soyez un indépendant, une TPE/PME ou une grande entreprise, nous pouvons collaborer ensemble pour renforcer votre présence sur le web.">
+<meta property="twitter:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
+{{ end }}
+{{ define "styles" }}
+{{ $options := (dict "targetPath" "/css/home.css" "outputStyle" "compressed" "enableSourceMap" false) }}
+{{ $style := resources.Get "scss/home.scss" | resources.ToCSS $options | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end }}
+
+{{ define "bodyClass" }}home{{ end }}
+
+{{ define "main" }}
+<!-- HERO -->
+<section class="hero__title">
+	<h1>Aurélien Devaux</h1>
+	<h2>Creative Developer</h2>
+	<p>Je vous aide à concevoir et développer votre futur site internet (et pas que !). Que vous soyez un indépendant, une TPE/PME ou une grande entreprise, nous pouvons collaborer ensemble pour renforcer votre présence sur le web.</p>
+</section>
+
+<a href="/projects" class="linethrough hero__link--left to-right">
+	<span class="link__line"></span>
+	<span class="link__inner-text">Projets</span>
+	<span class="link__line"></span>
+</a>
+<a href="/about" class="linethrough hero__link--right to-left">
+	<span class="link__line"></span>
+	<span class="link__inner-text">Expériences</span>
+	<span class="link__line"></span>
+</a>
+
+<div class="hero__cover">
+	<canvas class="landscape"></canvas>
+	<script id="custom-vertex" type="x-shader/x-vertex">
+	vec3 mod289(vec3 x)
+	{
+		return x - floor(x * (1.0 / 289.0)) * 289.0;
+	}
+
+	vec4 mod289(vec4 x)
+	{
+		return x - floor(x * (1.0 / 289.0)) * 289.0;
+	}
+
+	vec4 permute(vec4 x)
+	{
+		return mod289(((x*34.0)+1.0)*x);
+	}
+
+	vec4 taylorInvSqrt(vec4 r)
+	{
+		return 1.79284291400159 - 0.85373472095314 * r;
+	}
+
+	vec3 fade(vec3 t) {
+		return t*t*t*(t*(t*6.0-15.0)+10.0);
+	}
+
+	// Classic Perlin noise
+	float cnoise(vec3 P)
+	{
+		vec3 Pi0 = floor(P); // Integer part for indexing
+		vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
+		Pi0 = mod289(Pi0);
+		Pi1 = mod289(Pi1);
+		vec3 Pf0 = fract(P); // Fractional part for interpolation
+		vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+		vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+		vec4 iy = vec4(Pi0.yy, Pi1.yy);
+		vec4 iz0 = Pi0.zzzz;
+		vec4 iz1 = Pi1.zzzz;
+
+		vec4 ixy = permute(permute(ix) + iy);
+		vec4 ixy0 = permute(ixy + iz0);
+		vec4 ixy1 = permute(ixy + iz1);
+
+		vec4 gx0 = ixy0 * (1.0 / 7.0);
+		vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+		gx0 = fract(gx0);
+		vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+		vec4 sz0 = step(gz0, vec4(0.0));
+		gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+		gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+
+		vec4 gx1 = ixy1 * (1.0 / 7.0);
+		vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+		gx1 = fract(gx1);
+		vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+		vec4 sz1 = step(gz1, vec4(0.0));
+		gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+		gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+
+		vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+		vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+		vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+		vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+		vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+		vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+		vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+		vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+
+		vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+		g000 *= norm0.x;
+		g010 *= norm0.y;
+		g100 *= norm0.z;
+		g110 *= norm0.w;
+		vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+		g001 *= norm1.x;
+		g011 *= norm1.y;
+		g101 *= norm1.z;
+		g111 *= norm1.w;
+
+		float n000 = dot(g000, Pf0);
+		float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+		float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+		float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+		float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+		float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+		float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+		float n111 = dot(g111, Pf1);
+
+		vec3 fade_xyz = fade(Pf0);
+		vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+		vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+		float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+		return 2.2 * n_xyz;
+	}
+
+	// Classic Perlin noise, periodic variant
+	float pnoise(vec3 P, vec3 rep)
+	{
+		vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
+		vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
+		Pi0 = mod289(Pi0);
+		Pi1 = mod289(Pi1);
+		vec3 Pf0 = fract(P); // Fractional part for interpolation
+		vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+		vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+		vec4 iy = vec4(Pi0.yy, Pi1.yy);
+		vec4 iz0 = Pi0.zzzz;
+		vec4 iz1 = Pi1.zzzz;
+
+		vec4 ixy = permute(permute(ix) + iy);
+		vec4 ixy0 = permute(ixy + iz0);
+		vec4 ixy1 = permute(ixy + iz1);
+
+		vec4 gx0 = ixy0 * (1.0 / 7.0);
+		vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+		gx0 = fract(gx0);
+		vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+		vec4 sz0 = step(gz0, vec4(0.0));
+		gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+		gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+
+		vec4 gx1 = ixy1 * (1.0 / 7.0);
+		vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+		gx1 = fract(gx1);
+		vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+		vec4 sz1 = step(gz1, vec4(0.0));
+		gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+		gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+
+		vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+		vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+		vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+		vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+		vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+		vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+		vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+		vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+
+		vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+		g000 *= norm0.x;
+		g010 *= norm0.y;
+		g100 *= norm0.z;
+		g110 *= norm0.w;
+		vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+		g001 *= norm1.x;
+		g011 *= norm1.y;
+		g101 *= norm1.z;
+		g111 *= norm1.w;
+
+		float n000 = dot(g000, Pf0);
+		float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+		float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+		float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+		float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+		float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+		float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+		float n111 = dot(g111, Pf1);
+
+		vec3 fade_xyz = fade(Pf0);
+		vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+		vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+		float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+		return 2.2 * n_xyz;
+	}
+
+	#define PI 3.1415926535897932384626433832795
+
+	uniform float time;
+	uniform float maxHeight;
+	uniform float speed;
+	uniform float distortCenter;
+	uniform float roadWidth;
+	varying float vDisplace;
+
+	varying float fogDepth;
+
+	void main(){
+
+		float t = time * speed;
+		float wRoad = distortCenter;
+		float wRoad2 = wRoad * 0.5;
+
+		float angleCenter = uv.y * PI*4.0;
+		angleCenter += t * 0.9;
+
+		float centerOff = (
+			sin(angleCenter) +
+			sin(angleCenter*0.5)
+		) * wRoad;
+
+
+		vec3 noiseIn = vec3(uv, 1.0)*10.0;
+		float noise = cnoise(vec3(noiseIn.x, noiseIn.y + t, noiseIn.z));
+		noise += 1.0;
+		float h = noise;
+		float angle = (uv.x - centerOff) * PI;
+		float f = abs(cos(angle));
+		h *= pow(f, 1.5 + roadWidth);
+
+
+		vDisplace = h;
+
+
+		h*=maxHeight;
+
+		vec3 transformed = vec3( position.x, position.y, position.z + h );
+
+
+		vec4 mvPosition = modelViewMatrix * vec4( transformed, 1.0 );
+		gl_Position = projectionMatrix * mvPosition;
+
+		fogDepth = -mvPosition.z;
+
+	}
+</script>
+	<script id="custom-fragment" type="x-shader/x-fragment">
+					uniform float time;
+					uniform vec3 color;
+					uniform sampler2D pallete;
+					varying float vDisplace;
+
+					uniform vec3 fogColor;
+					uniform float fogNear;
+					uniform float fogFar;
+					varying float fogDepth;
+
+					void main(){
+
+						vec2 stripPos = vec2( 0.0, vDisplace );
+						vec4 stripColor = texture2D( pallete, stripPos );
+						stripColor *= pow(1.0-vDisplace, 1.0);
+
+						gl_FragColor = stripColor;
+
+						#ifdef USE_FOG
+							float fogFactor = smoothstep( fogNear, fogFar, fogDepth );
+							gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );
+						#endif
+					}
+
+				</script>
+</div>
+
+<figure class="hero__square equal">
+	<img src="/images/pages/home-absurd.png" alt="Illustration absurde représentant une idée" title="&copy;&nbsp;absurd.design">
+</figure>
+
+<figure class="hero__image" title="Illustration by Ouch.pics"></figure>
+
+<!-- SKILLS -->
+<section class="title" id="skills-title">
+	<h2>Compétences</h2>
+	<a href="/skills" class="arrow">
+		<span>Voir tout</span>
+		<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z"
+						fill="black" />
+		</svg>
+	</a>
+</section>
+
+<section id="skills-row1">
+	{{ range .Site.Data.skills.skills }}
+	{{ if and (eq .homepage true) (eq .row 1) }}
+	<article class="skill-item equal">
+		<header>{{ .name }}</header>
+		<h3>{{ .abbr }}</h3>
+		<footer>
+			{{ if eq .completed true }}
+			<svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M18.4545 1L6.45455 13L1 7.54545" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+			</svg>
+			{{ else }}
+			<svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M23 1L13.5 10.5L8.5 5.5L1 13" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+				<path d="M17 1H23V7" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			{{ end }}
+		</footer>
+	</article>
+	{{ end }}
+	{{ end }}
+</section>
+
+<section id="skills-row2">
+	{{ range .Site.Data.skills.skills }}
+	{{ if and (eq .homepage true) (eq .row 2) }}
+	<article class="skill-item equal">
+		<header>{{ .name }}</header>
+		<h3>{{ .abbr }}</h3>
+		<footer>
+			{{ if eq .completed true }}
+			<svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M18.4545 1L6.45455 13L1 7.54545" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+			</svg>
+			{{ else }}
+			<svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M23 1L13.5 10.5L8.5 5.5L1 13" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+				<path d="M17 1H23V7" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			{{ end }}
+		</footer>
+	</article>
+	{{ end }}
+	{{ end }}
+</section>
+
+
+<!-- PLAYGROUND -->
+<div class="playground"></div>
+
+<!-- PROJECTS -->
+<div class="title" id="projects-title">
+	<h2>Projets</h2>
+	<a href="/projects" class="arrow">
+		<span>Voir tout</span>
+		<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z"
+						fill="black" />
+		</svg>
+	</a>
+</div>
+
+<section id="projects">
+	{{ $list := where .Site.RegularPages "Section" "projects" }}
+	{{ $len := len $list }}
+
+	{{ range $index, $element := $list }}
+	{{ if and (lt $index 4) (eq .Params.homepage true) }}
+	<a href="{{ .Permalink }}" id="project{{ .Params.position }}" class="project-item">
+		<figure>
+			<img class="project-item__image" src="{{ .Params.thumbnail }}" alt="{{ .Params.thumbnail_alt }}">
+			<figcaption class="project-item__label">
+				<h3 class="project-item__name">{{ .Title }}</h3>
+				<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+				<p class="project-item__mission">{{ .Params.mission }}</p>
+			</figcaption>
+		</figure>
+	</a>
+	{{ end }}
+	{{ end }}
+</section>
+
+<!-- BLOG -->
+<!--
+<section class="title" id="blog-title">
+	<h2>Blog</h2>
+	<a href="#!" class="arrow">
+		<span>All articles</span>
+		<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="black"/>
+		</svg>
+	</a>
+</section>
+
+<article id="article1" class="blog-item blog-item--horizontal">
+	<figure class="blog-item__thumbnail">
+		<img src="https://source.unsplash.com/WrnvuEk6aNc" alt="">
+	</figure>
+	<header>
+		<time class="blog-item__publish-date">{{ now.Format "2 January 2006" }}</time>
+		<div class="blog-item__reading-time">
+			<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.59091C3.28878 1.59091 1.09091 3.78878 1.09091 6.5C1.09091 9.21122 3.28878 11.4091 6 11.4091C8.71122 11.4091 10.9091 9.21122 10.9091 6.5C10.9091 3.78878 8.71122 1.59091 6 1.59091ZM0 6.5C0 3.18629 2.68629 0.5 6 0.5C9.31371 0.5 12 3.18629 12 6.5C12 9.81371 9.31371 12.5 6 12.5C2.68629 12.5 0 9.81371 0 6.5Z" fill="black"/>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00004 2.68188C6.30129 2.68188 6.5455 2.92609 6.5455 3.22734V6.16296L8.4258 7.10311C8.69524 7.23783 8.80445 7.56547 8.66973 7.83491C8.53501 8.10435 8.20737 8.21357 7.93793 8.07885L5.75611 6.98794C5.57132 6.89554 5.45459 6.70667 5.45459 6.50007V3.22734C5.45459 2.92609 5.6988 2.68188 6.00004 2.68188Z" fill="black"/>
+			</svg>
+			<span>2 min</span>
+		</div>
+	</header>
+	<h3 class="blog-item__title">Article title</h3>
+	<p class="blog-item__excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam ea eius est ipsam itaque minus pariatur sit tenetur.</p>
+	<footer>
+		<a href="#!" class="arrow blog-item__link">
+			<span>Read more</span>
+			<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="black"/>
+			</svg>
+		</a>
+	</footer>
+</article>
+<article id="article2" class="blog-item blog-item">
+	<figure class="blog-item__thumbnail">
+		<img src="https://source.unsplash.com/WrnvuEk6aNc" alt="">
+	</figure>
+	<header>
+		<time class="blog-item__publish-date">{{ now.Format "2 January 2006" }}</time>
+		<div class="blog-item__reading-time">
+			<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.59091C3.28878 1.59091 1.09091 3.78878 1.09091 6.5C1.09091 9.21122 3.28878 11.4091 6 11.4091C8.71122 11.4091 10.9091 9.21122 10.9091 6.5C10.9091 3.78878 8.71122 1.59091 6 1.59091ZM0 6.5C0 3.18629 2.68629 0.5 6 0.5C9.31371 0.5 12 3.18629 12 6.5C12 9.81371 9.31371 12.5 6 12.5C2.68629 12.5 0 9.81371 0 6.5Z" fill="black"/>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00004 2.68188C6.30129 2.68188 6.5455 2.92609 6.5455 3.22734V6.16296L8.4258 7.10311C8.69524 7.23783 8.80445 7.56547 8.66973 7.83491C8.53501 8.10435 8.20737 8.21357 7.93793 8.07885L5.75611 6.98794C5.57132 6.89554 5.45459 6.70667 5.45459 6.50007V3.22734C5.45459 2.92609 5.6988 2.68188 6.00004 2.68188Z" fill="black"/>
+			</svg>
+			<span>2 min</span>
+		</div>
+	</header>
+	<h3 class="blog-item__title">Article title</h3>
+	<p class="blog-item__excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam ea eius est ipsam itaque minus pariatur sit tenetur.</p>
+	<footer>
+		<a href="#!" class="arrow blog-item__link">
+			<span>Read more</span>
+			<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="black"/>
+			</svg>
+		</a>
+	</footer>
+</article>
+<article id="article3" class="blog-item blog-item">
+	<figure class="blog-item__thumbnail">
+		<img src="https://source.unsplash.com/WrnvuEk6aNc" alt="">
+	</figure>
+	<header>
+		<time class="blog-item__publish-date">{{ now.Format "2 January 2006" }}</time>
+		<div class="blog-item__reading-time">
+			<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.59091C3.28878 1.59091 1.09091 3.78878 1.09091 6.5C1.09091 9.21122 3.28878 11.4091 6 11.4091C8.71122 11.4091 10.9091 9.21122 10.9091 6.5C10.9091 3.78878 8.71122 1.59091 6 1.59091ZM0 6.5C0 3.18629 2.68629 0.5 6 0.5C9.31371 0.5 12 3.18629 12 6.5C12 9.81371 9.31371 12.5 6 12.5C2.68629 12.5 0 9.81371 0 6.5Z" fill="black"/>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00004 2.68188C6.30129 2.68188 6.5455 2.92609 6.5455 3.22734V6.16296L8.4258 7.10311C8.69524 7.23783 8.80445 7.56547 8.66973 7.83491C8.53501 8.10435 8.20737 8.21357 7.93793 8.07885L5.75611 6.98794C5.57132 6.89554 5.45459 6.70667 5.45459 6.50007V3.22734C5.45459 2.92609 5.6988 2.68188 6.00004 2.68188Z" fill="black"/>
+			</svg>
+			<span>2 min</span>
+		</div>
+	</header>
+	<h3 class="blog-item__title">Article title</h3>
+	<p class="blog-item__excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam ea eius est ipsam itaque minus pariatur sit tenetur.</p>
+	<footer>
+		<a href="#!" class="arrow blog-item__link">
+			<span>Read more</span>
+			<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="black"/>
+			</svg>
+		</a>
+	</footer>
+</article>
+<article id="article4" class="blog-item blog-item--horizontal">
+	<figure class="blog-item__thumbnail">
+		<img src="https://source.unsplash.com/WrnvuEk6aNc" alt="">
+	</figure>
+	<header>
+		<time class="blog-item__publish-date">{{ now.Format "2 January 2006" }}</time>
+		<div class="blog-item__reading-time">
+			<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.59091C3.28878 1.59091 1.09091 3.78878 1.09091 6.5C1.09091 9.21122 3.28878 11.4091 6 11.4091C8.71122 11.4091 10.9091 9.21122 10.9091 6.5C10.9091 3.78878 8.71122 1.59091 6 1.59091ZM0 6.5C0 3.18629 2.68629 0.5 6 0.5C9.31371 0.5 12 3.18629 12 6.5C12 9.81371 9.31371 12.5 6 12.5C2.68629 12.5 0 9.81371 0 6.5Z" fill="black"/>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00004 2.68188C6.30129 2.68188 6.5455 2.92609 6.5455 3.22734V6.16296L8.4258 7.10311C8.69524 7.23783 8.80445 7.56547 8.66973 7.83491C8.53501 8.10435 8.20737 8.21357 7.93793 8.07885L5.75611 6.98794C5.57132 6.89554 5.45459 6.70667 5.45459 6.50007V3.22734C5.45459 2.92609 5.6988 2.68188 6.00004 2.68188Z" fill="black"/>
+			</svg>
+			<span>2 min</span>
+		</div>
+	</header>
+	<h3 class="blog-item__title">Article title</h3>
+	<p class="blog-item__excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet aperiam ea eius est ipsam itaque minus pariatur sit tenetur.</p>
+	<footer>
+		<a href="#!" class="arrow blog-item__link">
+			<span>Read more</span>
+			<svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M100.354 4.35356C100.549 4.1583 100.549 3.84172 100.354 3.64646L97.1716 0.464475C96.9763 0.269212 96.6597 0.269212 96.4645 0.464475C96.2692 0.659737 96.2692 0.976319 96.4645 1.17158L99.2929 4.00001L96.4645 6.82844C96.2692 7.0237 96.2692 7.34028 96.4645 7.53554C96.6597 7.7308 96.9763 7.7308 97.1716 7.53554L100.354 4.35356ZM-4.37114e-08 4.5L100 4.50001L100 3.50001L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="black"/>
+			</svg>
+		</a>
+	</footer>
+</article>
+
+<section class="stay-updated">
+	<h3>Stay updated on future posts</h3>
+	<p>Enter your email below and you'll receive an email each time I post an article !</p>
+	<form action="" method="post">
+		<div class="form-input">
+			<label for="email">Your email :</label>
+			<input type="text" name="email" id="email" placeholder="john.doe@rebrand.design">
+		</div>
+		<button type="submit">Add me to the list !</button>
+	</form>
+</section>
+-->
+{{ partial "contactform" (dict "blocTitle" "On prend un café ?") }}
+{{ end }}
+
+{{ define "scripts" }}
+{{ $app := resources.Get "js/app.js" }}
+{{ $landscape := resources.Get "js/animatedlandscape.js" }}
+{{ $three := resources.Get "js/vendor/three.min.js" }}
+{{ $sky := resources.Get "js/vendor/Sky.js" }}
+{{ $hammer := resources.Get "js/vendor/hammer.min.js" }}
+{{ $charming := resources.Get "js/vendor/charming.min.js" }}
+{{ $tween := resources.Get "js/vendor/TweenMax.min.js" }}
+{{ $noise := resources.Get "js/ambient/noise.min.js" }}
+{{ $util := resources.Get "js/ambient/util.js" }}
+{{ $aurora := resources.Get "js/ambient/aurora.js" }}
+{{ $form := resources.Get "js/contactform.js" }}
+{{ $smtp := resources.Get "js/vendor/smtp.js" }}
+{{ $vendor := slice $three $hammer $charming $tween $noise | resources.Concat "js/home/vendor.js" | fingerprint }}
+{{ $js := slice $smtp $sky $util $app $aurora $landscape $form | resources.Concat "js/home/index.js" | minify | fingerprint }}
+{{ $home := resources.Get "js/resize-projects.js" | minify | fingerprint }}
+<script src="{{ $vendor.Permalink }}"></script>
+<script src="{{ $js.Permalink }}"></script>
+<script src="{{ $home.Permalink }}"></script>
+{{ end }}
