@@ -32,11 +32,12 @@
         <figure class="hero__thumbnail">
             <img src="{{ .Params.thumbnail }}" alt="{{ .Params.thumbnail_alt }}">
         </figure>
-        
+
         <div class="hero__details">
             <div class="hero__details-header">
                 <time>{{ .Params.year }}</time>
-                <span data-real-client="{{ .Params.real }}">{{ if eq .Params.real true}}Projet réel{{ else}}Projet fictif{{ end }}</span>
+                <span data-real-client="{{ .Params.real }}">{{ if eq .Params.real true}}Projet réel{{ else}}Projet
+                    fictif{{ end }}</span>
             </div>
             <div class="hero__details-inner">
                 <h1>{{ .Title }}</h1>
@@ -55,7 +56,7 @@
     </footer>
 </article>
 
-{{ partial "contactform" (dict "blocTitle" "Vous aimez ce projet ? Travaillons ensemble !") }}
+<!--{{ partial "contactform" (dict "blocTitle" "Vous aimez ce projet ? Travaillons ensemble !") }}-->
 {{ end }}
 
 {{ define "scripts" }}

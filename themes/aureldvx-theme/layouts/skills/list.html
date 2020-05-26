@@ -2,20 +2,23 @@
 <!-- Primary Meta Tags -->
 <title>Compétences ~ Aurélien Devaux</title>
 <meta name="title" content="Compétences ~ Aurélien Devaux">
-<meta name="description" content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
+<meta name="description"
+			content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ .Site.BaseURL }}skills">
 <meta property="og:title" content="Compétences ~ Aurélien Devaux">
-<meta property="og:description" content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
+<meta property="og:description"
+			content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
 <meta property="og:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="{{ .Site.BaseURL }}skills">
 <meta property="twitter:title" content="Compétences ~ Aurélien Devaux">
-<meta property="twitter:description" content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
+<meta property="twitter:description"
+			content="Spécialisées en développement et UI Design, mes compétences s'étalent aussi sur d'autres domaines du digital.">
 <meta property="twitter:image" content="{{ .Site.BaseURL }}images/social/social-thumbnail.jpg">
 {{ end }}
 {{ define "styles" }}
@@ -34,31 +37,33 @@
 <section id="filters">
 	<button type="button" data-filter="all" class="active">Toutes</button>
 	{{ range .Site.Data.skills.categories }}
-		<button type="button" data-filter="{{ . }}">{{ . }}</button>
+	<button type="button" data-filter="{{ . }}">{{ . }}</button>
 	{{ end }}
 </section>
 
 <section id="skills">
 	{{ range .Site.Data.skills.skills }}
-		<article class="skill-item equal" data-category="{{ .category }}">
-			<header>{{ .name }}</header>
-			<h3>{{ .abbr }}</h3>
-			<footer>
-				{{ if eq .completed true }}
-					<svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M18.4545 1L6.45455 13L1 7.54545" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				{{ else }}
-					<svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M23 1L13.5 10.5L8.5 5.5L1 13" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						<path d="M17 1H23V7" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				{{ end }}
-			</footer>
-		</article>
+	<article class="skill-item equal" data-category="{{ .category }}">
+		<header>{{ .name }}</header>
+		<h3>{{ .abbr }}</h3>
+		<footer>
+			{{ if eq .completed true }}
+			<svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M18.4545 1L6.45455 13L1 7.54545" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+			</svg>
+			{{ else }}
+			<svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M23 1L13.5 10.5L8.5 5.5L1 13" stroke="black" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+				<path d="M17 1H23V7" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+			{{ end }}
+		</footer>
+	</article>
 	{{ end }}
 </section>
-{{ partial "contactform" (dict "blocTitle" "Intéressé(e) par une compétence ? Travaillons ensemble !") }}
+<!--{{ partial "contactform" (dict "blocTitle" "Intéressé(e) par une compétence ? Travaillons ensemble !") }}-->
 {{ end }}
 
 {{ define "scripts" }}

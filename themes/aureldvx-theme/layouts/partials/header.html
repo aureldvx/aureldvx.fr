@@ -4,13 +4,15 @@
             <filter id="filter-1">
                 <feTurbulence type="fractalNoise" baseFrequency="0" numOctaves="1" result="warp"></feTurbulence>
                 <feOffset dx="-90" result="warpOffset"></feOffset>
-                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warpOffset">
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic"
+                                   in2="warpOffset">
                 </feDisplacementMap>
             </filter>
             <filter id="filter-2">
                 <feTurbulence type="fractalNoise" baseFrequency="0" numOctaves="20" result="warp"></feTurbulence>
                 <feOffset dx="-90" result="warpOffset"></feOffset>
-                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="40" in="SourceGraphic" in2="warpOffset">
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="40" in="SourceGraphic"
+                                   in2="warpOffset">
                 </feDisplacementMap>
             </filter>
             <filter id="filter-3">
@@ -21,7 +23,8 @@
             <filter id="filter-4">
                 <feTurbulence type="fractalNoise" baseFrequency="0" numOctaves="5" result="warp"></feTurbulence>
                 <feOffset dx="-90" result="warpOffset"></feOffset>
-                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="35" in="SourceGraphic" in2="warpOffset">
+                <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="35" in="SourceGraphic"
+                                   in2="warpOffset">
                 </feDisplacementMap>
             </filter>
             <filter id="filter-5">
@@ -49,23 +52,21 @@
             <path d="M103.856 36.0964C103.856 55.7278 88.0246 72.1928 67.76 72.1928C63.3271 72.1928 59.5274 71.5596 55.7278 70.293C61.4272 67.1267 65.8601 62.6938 69.0265 56.9943C80.4254 55.7278 88.6579 46.862 88.6579 36.0964C88.6579 25.3308 79.7921 15.8318 69.0265 15.1985C68.3932 15.1985 68.3932 15.1985 67.76 15.1985C67.1267 15.1985 65.8601 15.1985 65.2269 15.1985C60.1607 15.8318 55.0945 18.9981 51.9282 22.7978C51.2949 23.431 50.6617 24.6976 50.0284 25.3308C48.1286 28.4972 47.4953 32.2968 47.4953 36.0964C47.4953 39.896 48.7618 43.6957 50.6617 46.862C47.4953 50.6616 42.4291 53.828 36.7297 53.828C33.5634 48.7618 32.2968 42.4291 32.2968 36.0964C32.2968 29.7637 34.1966 23.431 36.7297 18.3649C37.363 17.0983 37.9962 16.465 38.6295 15.1985C41.7959 10.7656 46.2288 6.33272 51.9282 3.79964C53.1947 3.16637 54.4613 2.5331 55.7278 2.5331C59.5274 1.26656 63.9603 0.633291 68.3932 0.633291C88.0246 2.04444e-05 103.856 15.8318 103.856 36.0964Z"
                   fill="#00AEA5" />
         </svg>
-    
+
     </a>
-    
+
     {{ $list := .Site.Menus.main }}
     {{ $len := (len $list) }}
     {{ $currentPage := . }}
-    
+
     <nav>
         {{ range $index, $element := $list }}
         <a
-          class="animated__link {{ if $currentPage.IsMenuCurrent `main` . }}active{{ end }}"
-          href="{{ .URL | absURL }}">
+           class="animated__link {{ if $currentPage.IsMenuCurrent `main` . }}active{{ end }}"
+           href="{{ .URL | absURL }}">
             {{ .Name }}
         </a>
         {{ end }}
-        <a class="animated__link" href="tel:0684021824" target="_blank">Tél.</a>
-        <a class="animated__link" href="mailto:hello@aureldvx.fr" target="_blank">Mail.</a>
         <a class="animated__link" href="https://twitter.com/aurel_dvx" target="_blank">Tw.</a>
         <a class="animated__link" href="https://www.linkedin.com/in/aureldvx/" target="_blank">Li.</a>
         <a class="animated__link" href="https://www.instagram.com/aurel_dvx/" target="_blank">Ig.</a>
